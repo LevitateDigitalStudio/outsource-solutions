@@ -97,7 +97,15 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .nav a:not(.btn) { text-decoration: none; font-size: 15px; font-weight: 500; }
 .nav a:not(.btn):hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .nav .btn { padding: 10px 16px; font-size: 14px; }
-@media (max-width: 760px) { .nav a:not(.btn) { display: none; } .logo-m { height: 17px; } }
+.logo-s { display: none; height: 34px; width: auto; fill: var(--ink); }
+@media (max-width: 760px) { .nav a:not(.btn) { display: none; } }
+/* Mobile header: stacked small logo and a shorter "Register" button */
+@media (max-width: 759px) {
+  .logo-m { display: none; }
+  .logo-s { display: block; }
+  .site-header .wrap { padding-block: 14px; }
+  .nav .btn .long { display: none; }
+}
 
 /* Hero */
 .hero .wrap { display: grid; grid-template-columns: 1fr; gap: 40px; padding-block: 64px 72px; }
@@ -138,7 +146,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Roles: separate boxes with space between. To go back to the joined grid, add class "joined" to .roles */
 :root { --role-line: #c4c4c1; }
-.roles { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.roles { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
 @media (min-width: 760px) { .roles { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1100px) { .roles { gap: 24px; } }
 .role { display: flex; flex-direction: column; gap: 14px; padding: 28px 28px 24px; border: 1px solid var(--role-line); background: var(--paper); min-width: 0; transition: border-color .2s; }
@@ -158,6 +166,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .role .apply { align-self: flex-start; font-weight: 600; font-size: 15px; text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 10px; }
 .role .apply:hover .arrow { transform: translate(2px,-2px); }
 .role .apply .arrow { transition: transform .2s; }
+.more-roles { display: none; }
+/* Mobile: show the first three roles, the rest behind "See more roles" */
+@media (max-width: 759px) {
+  .roles.collapsed .role:nth-child(n+4) { display: none; }
+  .more-roles { display: flex; justify-content: space-between; width: 100%; margin-top: 20px; }
+  .more-roles::after { content: "+"; font-family: var(--mono); font-size: 18px; font-weight: 400; }
+  .more-roles[aria-expanded="true"]::after { content: "\2212"; }
+}
 .roles-note { margin-top: 20px; color: var(--ink-2); font-size: 15px; }
 
 /* Process */
@@ -182,6 +198,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .callout .pin { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; }
 
+/* Mobile: black register section so it's clear where the form starts and ends */
+@media (max-width: 759px) {
+  #register { background: var(--ink); color: var(--paper); border-top-color: var(--ink); }
+  #register .register-intro p { color: #c9c9c6; }
+  #register .label { color: #9a9a97; }
+  #register .callout { border-color: var(--paper); }
+  #register .callout .address { color: var(--paper); }
+  #register .form { border-color: var(--paper); color: var(--ink); }
+  #register .form .label { color: var(--ink-3); }
+  #register :focus-visible { outline-color: var(--paper); }
+  #register .form :focus-visible { outline-color: var(--ink); }
+}
 .form { border: 1px solid var(--rule); background: var(--paper); min-width: 0; }
 .form-head { padding: 24px 28px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
 .form-head h3 { font-size: 26px; font-weight: 600; }
@@ -284,12 +312,41 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
             </g>
         </g>
     </g>
+</svg><svg class="logo-s" viewBox="0 0 370 107" role="img" aria-label="Outsource Solutions" xmlns="http://www.w3.org/2000/svg">
+    <g transform="matrix(1,0,0,1,-1365.222622,-6500.597775)">
+        <g transform="matrix(1,0,0,1,0,1577.086952)">
+            <g transform="matrix(1,0,0,1,-19.719254,-5.57402)">
+                <g transform="matrix(5.967524,0,0,5.967524,-512.863092,2535.132749)">
+                    <path d="M321.502,409.731C323.254,409.731 324.97,408.639 324.97,406.143C324.97,403.671 323.242,402.579 321.49,402.579C319.738,402.579 318.022,403.671 318.022,406.143C318.022,408.639 319.738,409.731 321.502,409.731ZM321.502,408.579C320.218,408.579 319.366,407.667 319.366,406.143C319.366,404.631 320.218,403.719 321.49,403.719C322.762,403.719 323.626,404.643 323.626,406.143C323.626,407.655 322.774,408.579 321.502,408.579Z"/>
+                    <path d="M328.942,409.707C330.082,409.707 330.874,409.179 331.174,408.327L331.174,409.575L332.518,409.575L332.518,402.711L331.174,402.711L331.174,406.167C331.174,407.679 330.646,408.531 329.35,408.531C328.054,408.531 327.514,407.823 327.514,406.335L327.514,402.711L326.17,402.711L326.17,406.443C326.17,408.603 327.046,409.707 328.942,409.707Z"/>
+                    <path d="M337.126,409.671C337.414,409.671 337.798,409.635 338.062,409.575L337.882,408.531C337.618,408.567 337.462,408.591 337.33,408.591C336.286,408.591 335.914,408.099 335.914,406.683L335.914,403.755L337.942,403.755L337.942,402.711L335.914,402.711L335.914,401.163L334.558,401.451L334.558,402.711L333.562,402.711L333.562,403.755L334.558,403.755L334.558,406.839C334.558,408.939 335.362,409.671 337.126,409.671Z"/>
+                    <path d="M341.83,409.695C343.666,409.695 344.83,408.867 344.83,407.547C344.83,404.703 340.222,406.142 340.222,404.583C340.222,404.019 340.798,403.695 341.758,403.695C342.49,403.695 343.162,403.983 343.45,404.487L344.65,404.163C344.242,403.215 342.982,402.591 341.734,402.591C340.15,402.591 338.902,403.383 338.902,404.559C338.902,407.439 343.474,406.01 343.474,407.583C343.474,408.207 342.898,408.543 341.83,408.543C340.87,408.543 340.162,408.207 339.826,407.583L338.602,407.919C339.022,408.999 340.282,409.695 341.83,409.695Z"/>
+                    <path d="M349.198,409.731C350.95,409.731 352.666,408.639 352.666,406.143C352.666,403.671 350.938,402.579 349.186,402.579C347.434,402.579 345.718,403.671 345.718,406.143C345.718,408.639 347.434,409.731 349.198,409.731ZM349.198,408.579C347.914,408.579 347.062,407.667 347.062,406.143C347.062,404.631 347.914,403.719 349.186,403.719C350.458,403.719 351.322,404.643 351.322,406.143C351.322,407.655 350.47,408.579 349.198,408.579Z"/>
+                    <path d="M356.638,409.707C357.778,409.707 358.57,409.179 358.87,408.327L358.87,409.575L360.214,409.575L360.214,402.711L358.87,402.711L358.87,406.167C358.87,407.679 358.342,408.531 357.046,408.531C355.75,408.531 355.21,407.823 355.21,406.335L355.21,402.711L353.866,402.711L353.866,406.443C353.866,408.603 354.742,409.707 356.638,409.707Z"/>
+                    <path d="M361.858,409.575L363.202,409.575L363.202,406.179C363.202,404.499 363.934,403.671 365.47,403.959L365.614,402.663C364.186,402.459 363.466,403.131 363.202,403.863L363.202,402.711L361.858,402.711L361.858,409.575Z"/>
+                    <path d="M369.178,409.707C370.822,409.707 371.974,408.831 372.346,407.355L371.194,407.127C370.894,408.027 370.174,408.555 369.238,408.555C367.99,408.555 367.126,407.571 367.126,406.143C367.126,404.703 367.99,403.719 369.238,403.719C370.246,403.719 370.882,404.187 371.218,405.159L372.37,404.931C371.938,403.371 370.906,402.579 369.178,402.579C367.198,402.579 365.782,404.067 365.782,406.143C365.782,408.219 367.198,409.707 369.178,409.707Z"/>
+                    <path d="M376.63,409.707C378.178,409.707 379.258,409.059 379.81,407.787L378.574,407.595C378.238,408.255 377.614,408.579 376.654,408.579C375.322,408.579 374.494,407.823 374.446,406.491L379.906,406.491C380.074,404.187 378.754,402.579 376.57,402.579C374.518,402.579 373.102,404.031 373.102,406.143C373.102,408.291 374.494,409.707 376.63,409.707ZM374.482,405.435C374.638,404.247 375.442,403.647 376.594,403.647C377.806,403.647 378.55,404.343 378.646,405.435L374.482,405.435Z"/>
+                </g>
+                <g transform="matrix(4.759282,0,0,4.759282,-127.644414,3085.57116)">
+                    <path d="M320.998,409.695C322.726,409.695 323.854,408.891 323.854,407.667C323.854,405.039 318.874,406.443 318.874,404.451C318.874,403.683 319.678,403.191 320.914,403.191C321.874,403.191 322.69,403.611 323.122,404.235L323.662,403.959C323.146,403.143 322.114,402.591 320.914,402.591C319.33,402.591 318.226,403.347 318.226,404.439C318.226,407.067 323.194,405.699 323.194,407.667C323.194,408.543 322.366,409.083 320.998,409.083C319.81,409.083 318.862,408.591 318.382,407.787L317.818,408.027C318.346,409.035 319.558,409.695 320.998,409.695Z"/>
+                    <path d="M328.162,409.731C329.854,409.731 331.522,408.639 331.522,406.143C331.522,403.671 329.842,402.579 328.15,402.579C326.446,402.579 324.79,403.671 324.79,406.143C324.79,408.639 326.446,409.731 328.162,409.731ZM328.162,409.119C326.506,409.119 325.438,407.991 325.438,406.143C325.438,404.319 326.506,403.191 328.15,403.191C329.782,403.191 330.874,404.331 330.874,406.143C330.874,407.979 329.794,409.119 328.162,409.119Z"/>
+                    <rect x="332.938" y="400.479" width="0.66" height="9.096"/>
+                    <path d="M337.99,409.683C339.31,409.683 340.102,408.963 340.402,407.955L340.402,409.575L341.05,409.575L341.05,402.711L340.402,402.711L340.402,406.095C340.402,407.967 339.718,409.071 338.074,409.071C336.442,409.071 335.71,408.171 335.71,406.335L335.71,402.711L335.062,402.711L335.062,406.359C335.062,408.531 336.022,409.683 337.99,409.683Z"/>
+                    <path d="M345.49,409.659C345.658,409.659 345.934,409.647 346.186,409.599L346.078,409.035C345.802,409.083 345.658,409.095 345.526,409.095C344.278,409.095 343.858,408.507 343.858,406.707L343.858,403.275L346.09,403.275L346.09,402.711L343.858,402.711L343.858,401.271L343.198,401.415L343.198,402.711L342.154,402.711L342.154,403.275L343.198,403.275L343.198,406.743C343.198,408.867 343.858,409.659 345.49,409.659Z"/>
+                    <path d="M347.59,401.619C347.83,401.619 348.034,401.427 348.034,401.187C348.034,400.935 347.83,400.755 347.59,400.755C347.35,400.755 347.158,400.935 347.158,401.187C347.158,401.427 347.35,401.619 347.59,401.619ZM347.266,409.575L347.902,409.575L347.902,402.711L347.266,402.711L347.266,409.575Z"/>
+                    <path d="M352.762,409.731C354.454,409.731 356.122,408.639 356.122,406.143C356.122,403.671 354.442,402.579 352.75,402.579C351.046,402.579 349.39,403.671 349.39,406.143C349.39,408.639 351.046,409.731 352.762,409.731ZM352.762,409.119C351.106,409.119 350.038,407.991 350.038,406.143C350.038,404.319 351.106,403.191 352.75,403.191C354.382,403.191 355.474,404.331 355.474,406.143C355.474,407.979 354.394,409.119 352.762,409.119Z"/>
+                    <path d="M357.538,409.575L358.186,409.575L358.186,406.191C358.186,404.319 358.882,403.215 360.526,403.215C362.158,403.215 362.89,404.115 362.89,405.951L362.89,409.575L363.538,409.575L363.538,405.927C363.538,403.755 362.578,402.603 360.61,402.603C359.29,402.603 358.498,403.323 358.186,404.331L358.186,402.711L357.538,402.711L357.538,409.575Z"/>
+                    <path d="M367.714,409.695C369.442,409.695 370.57,408.891 370.57,407.667C370.57,405.039 365.59,406.443 365.59,404.451C365.59,403.683 366.394,403.191 367.63,403.191C368.59,403.191 369.406,403.611 369.838,404.235L370.378,403.959C369.862,403.143 368.83,402.591 367.63,402.591C366.046,402.591 364.942,403.347 364.942,404.439C364.942,407.067 369.91,405.699 369.91,407.667C369.91,408.543 369.082,409.083 367.714,409.083C366.526,409.083 365.578,408.591 365.098,407.787L364.534,408.027C365.062,409.035 366.274,409.695 367.714,409.695Z"/>
+                </g>
+            </g>
+        </g>
+    </g>
 </svg></a>
     <nav class="nav" aria-label="Main">
       <a href="#why">Why join us</a>
       <a href="#roles">Roles</a>
       <a href="#faq">FAQ</a>
-      <a class="btn" href="#register">Register your interest <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+      <a class="btn" href="#register"><span>Register<span class="long"> your interest</span></span> <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
     </nav>
   </div>
 </header>
@@ -342,7 +399,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
         <div style="display:grid;gap:16px"><span class="label">Open roles</span><h2>Find your role in Dhaka</h2></div>
         <p>Bring your skills and ideas to our Dhaka team, with opportunities to contribute, develop and grow alongside us.</p>
       </div>
-      <div class="roles">
+      <div class="roles collapsed" id="roles-list">
         <article class="role">
           <div class="role-top"><span class="label">Dhaka &middot; Office-based</span><span class="label">Full-time</span></div>
           <h3>UK Accounting Lead</h3>
@@ -386,6 +443,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
           <a class="apply" href="#register" data-role="Payroll Executive">Register interest <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
         </article>
       </div>
+      <button class="btn btn-ghost more-roles" type="button" aria-expanded="false" aria-controls="roles-list">See more roles</button>
       <p class="roles-note">Qualifications and experience are considered in relation to each role. You can also register if you're planning to begin professional studies.</p>
     </div>
   </section>
@@ -556,6 +614,16 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   var MAX = 5 * 1024 * 1024;
   var OK = /\.(pdf|docx?)$/i;
   var chosen = null;
+
+  // Mobile "See more roles" toggle
+  var more = document.querySelector('.more-roles');
+  var list = document.getElementById('roles-list');
+  more.addEventListener('click', function () {
+    var open = list.classList.toggle('collapsed') === false;
+    more.setAttribute('aria-expanded', open);
+    more.textContent = open ? 'See fewer roles' : 'See more roles';
+    if (!open) list.scrollIntoView({ block: 'start' });
+  });
 
   // "Register interest" on a role preselects it in the form
   document.querySelectorAll('[data-role]').forEach(function (a) {
