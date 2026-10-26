@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Privacy Notice | Outsource Solutions</title>
+<title>Privacy Policy | Outsource Solutions</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="How Outsource Solutions collects, uses and protects the personal information and CVs shared by jobseekers.">
+<meta name="description" content="How Outsource Solutions collects, uses, shares and protects the information and CVs shared by jobseekers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
 <style>
 /* Layout: a ruled ledger. Thin black rules split the page into rows and columns like a working spreadsheet; content sits in the cells. */
 :root {
@@ -112,13 +113,18 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (min-width: 900px) { .hero .wrap { grid-template-columns: 5fr 6fr; gap: 64px; align-items: stretch; padding-block: 88px 96px; } }
 .hero-copy { display: flex; flex-direction: column; gap: 24px; justify-content: center; min-width: 0; }
 .hero h1 { font-size: clamp(42px, 6.4vw, 76px); line-height: 1.02; font-weight: 500; }
-.hero .lede { font-size: clamp(19px, 2vw, 22px); font-weight: 300; color: var(--ink-2); max-width: 30ch; }
+.hero .lede { font-size: clamp(19px, 2vw, 22px); font-weight: 300; color: var(--ink-2); max-width: 34ch; }
+.hero h1 + .lede { margin-bottom: -8px; }
+@media (min-width: 900px) { .hero .wrap > .ph { aspect-ratio: auto; height: 100%; } }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 8px; }
 .hero-meta span { display: inline-flex; align-items: center; gap: 8px; }
 .hero-meta span::before { content: ""; width: 6px; height: 6px; background: var(--ink); }
 
 /* Image placeholders: plain grey boxes */
 .ph { aspect-ratio: 4 / 3; width: 100%; max-width: 100%; background: var(--cell); display: grid; place-items: end start; padding: 16px; }
+/* Hero photo: never crop the bottom (the photo has text there); any trimming comes off the top or sides. */
+.hero-photo { aspect-ratio: 6 / 5; padding: 0; display: block; }
+.hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
 .ph .note { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
 
 /* Section scaffolding */
@@ -132,11 +138,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Why join */
 .grow { display: grid; grid-template-columns: 1fr; gap: 40px; }
-@media (min-width: 900px) { .grow { grid-template-columns: 5fr 6fr; gap: 64px; } }
+@media (min-width: 900px) { .grow { grid-template-columns: 5fr 6fr; gap: 64px; align-items: start; } .grow-intro { position: sticky; top: 120px; } }
 .grow-intro { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
 .grow-intro h2 { font-size: clamp(32px, 4.2vw, 50px); line-height: 1.05; }
 .grow-intro p { color: var(--ink-2); max-width: 44ch; }
-.grow-intro .ph { margin-top: 16px; }
 .points { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 .points li { display: grid; grid-template-columns: 48px 1fr; gap: 20px; padding-block: 28px; border-bottom: 1px solid var(--rule-soft); }
 .points li:last-child { border-bottom: 1px solid var(--rule); }
@@ -185,9 +190,69 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .steps h3 { font-size: 24px; font-weight: 600; }
 .steps p { color: var(--ink-2); }
 
+/* Webinars */
+.webinar { display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+@media (min-width: 900px) { .webinar { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
+.webinar-art { position: relative; min-width: 0; overflow: hidden; background: var(--ink); aspect-ratio: 1 / 1; display: grid; place-items: center; padding: 56px 24px 24px; }
+@media (min-width: 900px) { .webinar-art { aspect-ratio: auto; height: 100%; min-height: 420px; } }
+.webinar-art .label { position: absolute; top: 24px; left: 24px; color: var(--paper); z-index: 1; transition: color .4s; }
+.webinar-art svg { position: relative; z-index: 1; width: 100%; max-width: 440px; height: auto; fill: none; stroke: var(--paper); stroke-width: 1.25; overflow: visible; }
+.webinar-art .guide { opacity: .7; }
+.webinar-art .tiles span { background: var(--ink); }
+.webinar-art.anim { background: var(--cell); }
+.webinar-art.anim .label { color: var(--ink); }
+.webinar-art.anim.in .label { color: var(--paper); transition-delay: 1s; }
+
+/* Square animations. "sweep": squares fill the box in a chevron wave, then the line art draws.
+   "reveal": covering squares slide away in the same wave to uncover an image.
+   Both play once when the box scrolls into view, and are skipped with "reduce motion". */
+.sweep, .reveal { position: relative; overflow: hidden; }
+.tiles { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(10, 1fr); grid-template-rows: repeat(7, 1fr); pointer-events: none; }
+.tiles span { margin-right: -1px; margin-bottom: -1px; transform-origin: left center; }
+.sweep .guide { stroke-dasharray: 5 5; transform-box: fill-box; }
+.sweep .guide.h { transform-origin: left center; }
+.sweep .guide.v { transform-origin: center top; }
+.sweep .thin { stroke-width: 1; }
+.sweep.anim .tiles span { transform: scaleX(0); }
+.sweep.anim.in .tiles span { transform: none; transition: transform .6s cubic-bezier(.5, 0, .2, 1) var(--t); }
+.sweep.anim .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.sweep.anim .guide.h { transform: scaleX(0); }
+.sweep.anim .guide.v { transform: scaleY(0); }
+.sweep.anim.in .draw { stroke-dashoffset: 0; transition: stroke-dashoffset 1.4s cubic-bezier(.65, 0, .35, 1) calc(var(--d) + 2s); }
+.sweep.anim.in .guide { transform: none; transition: transform 1s cubic-bezier(.65, 0, .35, 1) calc(var(--d) + 2s); }
+.reveal .tiles { z-index: 2; }
+.reveal .tiles span { background: var(--paper); transform: scaleX(0); transform-origin: right center; }
+.reveal.anim .tiles span { transform: none; }
+.reveal.anim.in .tiles span { transform: scaleX(0); transition: transform .6s cubic-bezier(.5, 0, .2, 1) var(--t); }
+.motion .reveal:not(.anim) { visibility: hidden; }
+
+/* Text reveal on scroll (not in the hero): headings rise out of a line mask, other text fades up.
+   Items in a list follow one another. Skipped with "reduce motion". */
+.motion .rv { opacity: 0; transform: translateY(18px); }
+.motion h2.rv { opacity: 1; transform: translateY(.4em); clip-path: inset(0 0 100% 0); }
+.motion .rv.in { opacity: 1; transform: none; clip-path: inset(-10% -10% -20% -10%); transition: opacity .7s ease var(--rd, 0s), transform .8s cubic-bezier(.2, .7, .2, 1) var(--rd, 0s), clip-path .8s cubic-bezier(.2, .7, .2, 1) var(--rd, 0s), border-color .2s; }
+
+.webinar-body { padding: 32px 0 36px; display: grid; gap: 14px; align-content: center; min-width: 0; }
+@media (min-width: 900px) { .webinar-body { padding: 48px 0 48px 56px; } }
+.webinar-body h3 { font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; font-weight: 600; max-width: 20ch; }
+.webinar-body > p { color: var(--ink-2); max-width: 52ch; }
+.webinar-body .webinar-format { color: var(--ink); font-size: 18px; }
+.webinar-meta { font-family: var(--mono); font-size: 13px; color: var(--ink); }
+.notify-form { display: grid; gap: 8px; margin-top: 8px; max-width: 480px; }
+.notify-form .flabel { font-size: 14px; font-weight: 600; }
+.notify { display: flex; }
+.notify input { flex: 1; min-width: 0; font: inherit; font-size: 16px; color: var(--ink); background: var(--white); border: 1px solid var(--ink); border-right: 0; border-radius: 0; padding: 12px 14px; }
+.notify input:focus { outline: none; box-shadow: inset 0 0 0 1px var(--ink); }
+.notify input::placeholder { color: var(--ink-3); }
+.notify .btn { flex: none; }
+.notify-form.invalid .notify input { border-color: var(--error); }
+.notify-form .hint a { color: inherit; }
+.notify-done { border: 1px solid var(--ink); padding: 14px 16px; max-width: 480px; margin-top: 8px; }
+.notify-done strong { display: block; }
+
 /* Register */
 .register { display: grid; grid-template-columns: 1fr; gap: 48px; }
-@media (min-width: 960px) { .register { grid-template-columns: 4fr 7fr; gap: 64px; } }
+@media (min-width: 960px) { .register { grid-template-columns: 4fr 7fr; gap: 64px; align-items: start; } .register-intro { position: sticky; top: 120px; } }
 .register-intro { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
 .register-intro h2 { font-size: clamp(32px, 4.2vw, 50px); line-height: 1.05; }
 .register-intro p { color: var(--ink-2); max-width: 40ch; }
@@ -247,7 +312,6 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .form-foot { grid-column: 1 / -1; display: grid; gap: 12px; }
 .form-foot .btn { justify-content: space-between; width: 100%; }
 .form-foot .small { font-size: 13px; color: var(--ink-3); text-align: center; }
-.bot-check { font-family: var(--mono); font-size: 12px; color: var(--ink-3); border: 1px dashed var(--rule-soft); padding: 10px 14px; text-align: center; }
 .hp { position: absolute; left: -9999px; }
 
 .done { padding: 48px 28px; display: grid; gap: 14px; }
@@ -271,8 +335,16 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* Footer */
 .site-footer { background: var(--ink); color: var(--paper); }
-.site-footer .wrap { padding-block: 64px 32px; display: grid; gap: 48px; }
+.site-footer .wrap { padding-block: 64px 32px; display: grid; gap: 40px; }
 .logo-l { height: 64px; width: auto; max-width: 100%; display: block; fill: var(--paper); }
+.foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 28px 48px; }
+.foot-links { display: flex; align-items: center; gap: 14px; font-size: 15px; }
+.foot-links a { text-decoration: none; }
+.foot-links a:hover, .foot-mail:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.foot-links span { color: #8a8a87; }
+.foot-contact { display: grid; gap: 14px; justify-items: start; }
+.foot-contact address { font-style: normal; font-size: 16px; line-height: 1.6; color: #d6d6d3; }
+.foot-mail { font-size: 17px; font-weight: 600; color: var(--paper); text-decoration: none; overflow-wrap: anywhere; }
 .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 32px; border-top: 1px solid rgba(236,236,235,.35); padding-top: 20px; font-size: 14px; color: #b9b9b6; }
 .foot-row a { color: var(--paper); }
 
@@ -345,6 +417,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     <nav class="nav" aria-label="Main">
       <a href="index.html#why">Why join us</a>
       <a href="index.html#roles">Roles</a>
+      <a href="index.html#webinars">Webinars</a>
       <a href="index.html#faq">FAQ</a>
       <a class="btn" href="index.html#register"><span>Register<span class="long"> your interest</span></span> <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
     </nav>
@@ -371,6 +444,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .legal-body p, .legal-body li { color: var(--ink-2); max-width: 68ch; }
 .legal-body ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .legal-body strong { color: var(--ink); font-weight: 600; }
+.legal-body a { color: var(--ink); }
 .mail { font-family: var(--mono); font-size: 15px; color: var(--ink); user-select: all; }
 .back { font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 4px; display: inline-flex; align-items: center; gap: 10px; justify-self: start; }
 .back .arrow { transform: rotate(-90deg); }
@@ -380,104 +454,90 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   <div class="wrap">
     <div class="legal-grid">
       <aside class="legal-side">
-        <span class="label">Privacy notice &middot; Last updated [date]</span>
-        <h1>Your data and your CV</h1>
-        <p>How Outsource Solutions collects, uses and protects the information you share when you register your interest.</p>
+        <span class="label">Last updated 25 October 2026</span>
+        <h1>Privacy Policy</h1>
+        <p>How Outsource Solutions collects, uses, shares and protects your information when you visit our website or register your interest.</p>
         <ol class="toc">
-          <li><a href="#who">Who we are</a></li>
-          <li><a href="#collect">What we collect</a></li>
-          <li><a href="#use">How we use it</a></li>
-          <li><a href="#share">Who we share it with</a></li>
-          <li><a href="#store">Where it's stored</a></li>
-          <li><a href="#keep">How long we keep it</a></li>
-          <li><a href="#rights">Your rights</a></li>
-          <li><a href="#cookies">Cookies</a></li>
-          <li><a href="#changes">Changes to this notice</a></li>
+          <li><a href="#s1">1. Who we are</a></li>
+          <li><a href="#s2">2. Information we collect</a></li>
+          <li><a href="#s3">3. Why we use your information</a></li>
+          <li><a href="#s4">4. Sharing within our group</a></li>
+          <li><a href="#s5">5. Storage, overseas access and security</a></li>
+          <li><a href="#s6">6. How long we keep information</a></li>
+          <li><a href="#s7">7. Your choices and rights</a></li>
+          <li><a href="#s8">8. Cookies and third-party services</a></li>
+          <li><a href="#s9">9. Updates and contact</a></li>
         </ol>
       </aside>
 
       <div class="legal-body">
-        <section id="who">
-          <h2>Who we are</h2>
-          <p>Outsource Solutions [registered company name, if different] is a company registered in Bangladesh [company registration number], with its office at 429 Road 30, Mohakhali DOHS, Dhaka. We recruit finance professionals to work from our Dhaka office with UK clients.</p>
-          <p>We are responsible for the personal information you share through this website. If you have any questions about this notice or your data, email us at <span class="mail">support@outsourcesolutionsbd.com</span>.</p>
+        <section id="s1">
+          <h2>1. Who we are</h2>
+          <p>Outsource Solutions is responsible for the personal information collected through outsourcesolutionsbd.com. This policy explains how we collect, use, share and protect information when you visit our website, contact us or register your interest in working with our Dhaka team.</p>
+<p>Responsible business: Outsource Solutions.<br>
+Trade Licence No.: TRAD/DNCC/037918/2025.<br>
+Office: House 429, Road 30, Mohakhali DOHS, Dhaka, Bangladesh.<br>
+Privacy contact: <a href="mailto:info@outsourcesolutionsbd.com">info@outsourcesolutionsbd.com</a></p>
         </section>
 
-        <section id="collect">
-          <h2>What we collect</h2>
-          <p>When you register your interest, we collect:</p>
-          <ul>
-            <li>your full name, email address, phone number and current city</li>
-            <li>your highest qualification, years of experience and preferred role</li>
-            <li>your IELTS score, if you choose to give it</li>
-            <li>your CV and anything you include in it</li>
-            <li>the date and time you registered, and your consent</li>
-          </ul>
-          <p>To protect the form from spam and bots, our security service also processes technical information such as your IP address and browser type. We don't use this to identify you.</p>
-          <p>Please don't include sensitive details in your CV that we don't need, such as your religion, health information or national ID number.</p>
+        <section id="s2">
+          <h2>2. Information we collect</h2>
+          <p>We collect the information you provide: your name, email address, phone number, current city, qualifications, relevant experience, preferred role and CV. Your IELTS result is optional. We also keep your recruitment correspondence, relevant interview or assessment notes, and a record of the consent you give. If references or additional checks are needed later, we will explain them before collecting that information.</p>
+<p>Our website and its service providers may process technical information such as your IP address, browser and device details, access times and security events to deliver and protect the service. See section 8 for website technologies.</p>
+<p>Please include only information relevant to recruitment. Do not upload national ID or passport copies, bank details, or unnecessary information about your health, religion or family. Please obtain permission before giving us another person’s contact details, such as a referee’s.</p>
         </section>
 
-        <section id="use">
-          <h2>How we use it</h2>
-          <p>We use your information only to:</p>
-          <ul>
-            <li>consider you for current and future roles with us</li>
-            <li>contact you about your registration</li>
-            <li>keep this website and form secure</li>
-          </ul>
-          <p>We use your information because you consent to it when you register. You can withdraw your consent at any time by emailing us, and we'll delete your registration.</p>
-          <p>We don't sell your information, and we don't use it for marketing.</p>
+        <section id="s3">
+          <h2>3. Why we use your information</h2>
+          <p>We use your registration to assess your experience against suitable Dhaka-based roles within our group, communicate with you and organise recruitment activities. This includes recruitment coordination, candidate assessment and related HR administration across our group companies and brands. We also use information where necessary to keep recruitment records accurate, protect the website and meet applicable legal obligations. We do not sell applicant information or use registrations for unrelated advertising.</p>
+<p>We ask for your consent to use your registration and CV for recruitment, including the internal group sharing described below. You can withdraw it by emailing us. This will not affect processing already carried out lawfully, but may mean we cannot continue considering you. Where processing is required or otherwise permitted by law, we will use it only for that purpose and explain any relevant retention requirement.</p>
+<p>If you sign up for a webinar or event, we use your email address only to send you updates about that event. You can ask us to stop at any time.</p>
         </section>
 
-        <section id="share">
-          <h2>Who we share it with</h2>
-          <p>Only our recruitment team can see your registration. We use a small number of trusted service providers to run this website and store registrations securely:</p>
-          <ul>
-            <li><strong>Cloudflare</strong>, for website hosting, secure storage of registrations and CVs, and spam protection</li>
-            <li><strong>[Email provider]</strong>, to notify our team when a new registration arrives</li>
-          </ul>
-          <p>These providers handle your information only on our instructions. We may also share information if the law requires us to.</p>
+        <section id="s4">
+          <h2>4. Sharing within our group</h2>
+          <p>We may share your registration, CV and relevant recruitment information internally with authorised recruitment, HR and management personnel across companies and brands within our corporate group. Our group means Outsource Solutions and businesses under common ownership or control, including those operating under different brand names. Sharing is limited to the recruitment and related administration purposes described in this policy, including consideration for suitable Dhaka-based opportunities across the group.</p>
+<p>Group access is limited to people who need the information for their work and is subject to confidentiality and appropriate data-protection arrangements. Each group company receiving information must use it only for the stated purposes and comply with applicable data-protection requirements. We do not share your CV with external clients, independent recruiters or unrelated businesses for their own recruitment or marketing purposes. Your CV is not published on the website.</p>
+<p>We also use service providers to support website operation, application storage, email and security. These providers are outside our group and may process information only as necessary to provide their services under appropriate data-protection arrangements. We may disclose information where required by law.</p>
         </section>
 
-        <section id="store">
-          <h2>Where it's stored</h2>
-          <p>Your registration and CV are stored securely with Cloudflare. Their servers may be outside Bangladesh. Access is limited to our recruitment team and protected by login.</p>
+        <section id="s5">
+          <h2>5. Storage, overseas access and security</h2>
+          <p>Authorised group personnel may access your information in Bangladesh or the United Kingdom for the purposes described above. Supporting service providers may also process information outside Bangladesh. The same purpose and access restrictions apply to overseas group access. Where information is accessed or transferred internationally, we will meet applicable legal requirements, provide required information and obtain any necessary consent. You can contact us for details of the group companies or providers receiving your information and the safeguards applying to a particular transfer.</p>
+<p>We take appropriate technical and organisational steps to protect personal information and restrict access to authorised users. No system can be guaranteed completely secure. If a security incident affects your information, we will assess it and take the notification and other steps required by applicable law.</p>
         </section>
 
-        <section id="keep">
-          <h2>How long we keep it</h2>
-          <p>We keep your registration and CV for 12 months, so we can consider you for roles that open later. After that, we delete them. If you join us, your information becomes part of your employee record.</p>
+        <section id="s6">
+          <h2>6. How long we keep information</h2>
+          <p>We keep recruitment information only for as long as it is needed for the purpose for which it was collected. We determine this by considering whether recruitment is ongoing, whether you have agreed to be considered for future opportunities, and any applicable legal recordkeeping requirements. We review retained information and remove records that are no longer needed. You can withdraw your consent or request deletion at any time.</p>
+<p>Information no longer needed is deleted or anonymised. Any information that must be retained to meet a legal requirement is kept only for the necessary period and purpose. If you join us, relevant information will become part of your employment record and we will explain the separate employee retention arrangements. Deletion procedures also cover recipient group companies, service providers and retained copies as required by applicable law.</p>
         </section>
 
-        <section id="rights">
-          <h2>Your rights</h2>
-          <p>You can ask us to:</p>
-          <ul>
-            <li>tell you what information we hold about you and give you a copy</li>
-            <li>correct information that's wrong or out of date</li>
-            <li>delete your registration and CV</li>
-          </ul>
-          <p>Email <span class="mail">support@outsourcesolutionsbd.com</span> from the address you registered with. We'll reply within 30 days.</p>
+        <section id="s7">
+          <h2>7. Your choices and rights</h2>
+          <p>You may contact us to ask about our use of your information, obtain access or a copy, correct inaccurate details, withdraw consent or request deletion. You may also request restriction, object to processing or request transfer of your information where those rights apply. If you are concerned about an automated assessment, you can ask how it was used and request human consideration where applicable.</p>
+<p>Email <a href="mailto:info@outsourcesolutionsbd.com">info@outsourcesolutionsbd.com</a>, preferably from the address used to register. We may ask for proportionate information to verify your identity. We will respond within the applicable legal time limit and explain any lawful reason we cannot meet a request in full. You may also raise a complaint with the competent Bangladesh data-protection authority, subject to the applicable complaints procedure.</p>
         </section>
 
-        <section id="cookies">
-          <h2>Cookies</h2>
-          <p>This website doesn't use advertising or tracking cookies. Our spam protection may use strictly necessary technical data to check that a real person is filling in the form. Any visitor statistics we collect are anonymous and don't use cookies.</p>
+        <section id="s8">
+          <h2>8. Cookies and third-party services</h2>
+          <p>The website may use essential technical features to operate the registration form and protect it from misuse. External services, such as fonts loaded from Google Fonts, may receive your IP address and browser information when your browser connects to them. You can manage cookies through your browser settings; blocking essential features may affect how the website works.</p>
+<p>If optional analytics or advertising technologies are introduced, we will explain their purposes and the choices available to you, and obtain consent where required. Your recruitment consent does not also provide consent to unrelated advertising.</p>
         </section>
 
-        <section id="changes">
-          <h2>Changes to this notice</h2>
-          <p>We may update this notice from time to time. The date at the top shows when it last changed.</p>
+        <section id="s9">
+          <h2>9. Updates and contact</h2>
+          <p>We may update this policy when our recruitment practices, website or legal requirements change. The date at the top shows the latest update. We will draw significant changes to your attention where appropriate and seek fresh consent where required. For privacy questions or requests, contact <a href="mailto:info@outsourcesolutionsbd.com">info@outsourcesolutionsbd.com</a> or write to our office address above.</p>
           <a class="back" href="index.html#register">Back to registration <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
         </section>
       </div>
     </div>
   </div>
 </main>
-
 <footer class="site-footer">
   <div class="wrap">
-    <svg class="logo-l" viewBox="0 0 535 126" role="img" aria-label="Outsource Solutions Bangladesh" xmlns="http://www.w3.org/2000/svg">
+    <div class="foot-top">
+      <svg class="logo-l" viewBox="0 0 535 126" role="img" aria-label="Outsource Solutions Bangladesh" xmlns="http://www.w3.org/2000/svg">
     <g transform="matrix(1,0,0,1,-185.369376,-7485.278635)">
         <g transform="matrix(1,0,0,1,0,2243.034647)">
             <g transform="matrix(1,0,0,1,-563.724677,-136.001657)">
@@ -518,16 +578,22 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
         </g>
     </g>
 </svg>
+      <nav class="foot-links" aria-label="Legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="recruitment-terms.html">Recruitment Terms</a>
+      </nav>
+    </div>
+    <div class="foot-contact">
+      <address>House 429, Road 30, Mohakhali DOHS<br>Dhaka, Bangladesh</address>
+      <a class="foot-mail" href="mailto:info@outsourcesolutionsbd.com">info@outsourcesolutionsbd.com</a>
+    </div>
     <div class="foot-row">
-      <span>&copy; 2026 Outsource Solutions</span>
-      <span>429 Road 30, Mohakhali DOHS, Dhaka &middot; Working with UK clients</span>
-      <a href="privacy.html">Privacy notice</a>
+      <span>&copy; 2026 Outsource Solutions. All rights reserved.</span>
     </div>
   </div>
-</footer>
-
-<script>
-// Always open the privacy notice at the top, unless a section link was followed
+</footer><script>
+// Always open this page at the top, unless a section link was followed
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 function toTop(){ if (!location.hash) { document.documentElement.style.scrollBehavior = "auto"; window.scrollTo(0, 0); document.documentElement.style.scrollBehavior = ""; } }
 toTop(); window.addEventListener("pageshow", toTop);
